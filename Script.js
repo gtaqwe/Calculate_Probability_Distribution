@@ -10,11 +10,17 @@ var viewPercent = false;
 
 
 function initNumVal() {
-    var realProbNum = Number(document.getElementById("probNum").value)
+    var realProbMin = Number(document.getElementById("probNum").min)
+    var realProbMax = Number(document.getElementById("probNum").max)
+    var realProbNum = chkNumRange(Number(document.getElementById("probNum").value),realProbMin,realProbMax)
     probNum = realProbNum / 100.0
     document.getElementById("probNum").value = Number(realProbNum.toFixed(3));
 
-    tryNum = Number(document.getElementById("tryNum").value)
+    var realTryMin = Number(document.getElementById("tryNum").min)
+    var realTryMax = Number(document.getElementById("tryNum").max)
+    tryNum = chkNumRange(Number(document.getElementById("tryNum").value),realTryMin,realTryMax)
+    document.getElementById("tryNum").value = tryNum
+
     viewBackExpectNum = Number(document.getElementById("backExpectNum").value)
     viewFrontExpectNum = Number(document.getElementById("frontExpectNum").value)
     distanceNum = Number(document.getElementById("frontExpectNum").value)
