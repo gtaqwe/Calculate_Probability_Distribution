@@ -8,6 +8,26 @@ div {
     margin: 10px;
 }
 
+.Capturebutton {
+  background-color: #4CA0F2;
+  border: none;
+  color: white;
+  width: 200px;
+  height: 50px;
+  font-weight: bold;
+  padding: 15px 32px;
+  margin: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.Capturebutton:hover {
+  background-color: #5CB4FE;
+}
+
 .switch {
     position: relative;
     display: inline-block;

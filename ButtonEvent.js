@@ -204,3 +204,19 @@ function doInterval(action, inputId, speed) {
     }, speed);
   }
 };
+
+
+function captureScreen() {
+    var pNum = document.getElementById("probNum").value;
+    var tNum = document.getElementById("tryNum").value;
+    var captureName = pNum + "-" + tNum + ".png";
+
+    downloadURI(canvas.toDataURL('image/png'), captureName);
+}
+
+function downloadURI(uri, filename) {
+    var link = document.createElement('a');
+    link.download = filename;
+    link.href = uri;
+    link.click();
+}
