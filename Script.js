@@ -368,6 +368,10 @@ function chkNumRange(target, min, max) {
 }
 
 function getToggle(viewVal) {
+    if (viewPercent != viewVal) {
+        myChart.options.animation.duration = 0;
+    }
+
     if (viewVal == true) {
         viewPercent = true;
     }
@@ -376,4 +380,7 @@ function getToggle(viewVal) {
     }
 
     myChart.update();
+    
+    // reset animation duration
+    myChart.options.animation.duration = 1000;
 }
