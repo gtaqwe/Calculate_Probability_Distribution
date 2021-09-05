@@ -42,7 +42,7 @@ chartColors = {
   green: "rgb(75, 192, 192)",
   blue: "rgb(54, 162, 235)",
   purple: "rgb(153, 102, 255)",
-  grey: "rgb(201, 203, 207)"
+  grey: "rgb(201, 203, 207)",
 };
 
 init();
@@ -60,14 +60,12 @@ function init() {
     labels: range(fbValObj.frontSetNum, fbValObj.backSetNum),
     datasets: [
       {
-        backgroundColor: chartColor(chartColors.blue)
-          .alpha(0.5)
-          .rgbString(),
+        backgroundColor: chartColor(chartColors.blue).alpha(0.5).rgbString(),
         borderColor: chartColors.blue,
         borderWidth: 1,
-        data: fbValObj.sliceArrayData
-      }
-    ]
+        data: fbValObj.sliceArrayData,
+      },
+    ],
   };
 
   chartOpt = setChartOption();
@@ -97,12 +95,12 @@ function setChartOption() {
       responsive: true,
       legend: {
         // position: 'top',
-        display: false
+        display: false,
       },
       title: {
         display: true,
         fontColor: "#000000",
-        fontSize: 15
+        fontSize: 15,
         // text: '확률 : ' + Number((probNum * 100).toFixed(3)) + '% , ' + tryNum + '회 시행'
       },
       scales: {
@@ -110,16 +108,16 @@ function setChartOption() {
           {
             scaleLabel: {
               display: true,
-              labelString: "확률"
+              labelString: "확률",
             },
             ticks: {
               // Include a dollar sign in the ticks
-              callback: function(value, index, values) {
+              callback: function (value, index, values) {
                 return value + "%";
-              }
-            }
-          }
-        ]
+              },
+            },
+          },
+        ],
         // xAxes: [{
         // 	scaleLabel: {
         // 		display: true,
@@ -135,17 +133,17 @@ function setChartOption() {
         bodyAlign: "center",
         callbacks: {
           // title: function () { },
-          label: function(tooltipItem) {
+          label: function (tooltipItem) {
             return Number(tooltipItem.yLabel) + "%";
-          }
-        }
+          },
+        },
       },
       hover: {
-        animationDuration: 0
+        animationDuration: 0,
       },
       animation: {
         // duration: 0,
-        onComplete: function() {
+        onComplete: function () {
           if (viewPercent == true) {
             var chartInstance = this.chart,
               ctx = chartInstance.ctx;
@@ -157,9 +155,9 @@ function setChartOption() {
             ctx.textAlign = "center";
             ctx.textBaseline = "bottom";
 
-            this.data.datasets.forEach(function(dataset, i) {
+            this.data.datasets.forEach(function (dataset, i) {
               var meta = chartInstance.controller.getDatasetMeta(i);
-              meta.data.forEach(function(bar, index) {
+              meta.data.forEach(function (bar, index) {
                 var data = dataset.data[index];
                 if (data > 0) {
                   ctx.fillText(data + "%", bar._model.x, bar._model.y - 5);
@@ -167,9 +165,9 @@ function setChartOption() {
               });
             });
           }
-        }
-      }
-    }
+        },
+      },
+    },
   };
 
   return opt;
@@ -293,7 +291,7 @@ function getFrontBackVal(dataArray) {
     backZeroIndex: backZeroIndex,
     frontSetNum: frontSetNum,
     backSetNum: backSetNum,
-    sliceArrayData: sliceArrayData
+    sliceArrayData: sliceArrayData,
   };
 
   return resObj;

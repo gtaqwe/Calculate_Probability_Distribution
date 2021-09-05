@@ -1,9 +1,3 @@
-canvas {
-  -moz-user-select: none;
-  -webkit-user-select: none;
-  -ms-user-select: none;
-}
-
 div {
   margin: 10px;
 }
@@ -148,4 +142,9 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 3rem;
   font-weight: bold;
   text-align: center;
+}
+
+footer {
+  text-align: center;
+  font-size: 10px;
 }

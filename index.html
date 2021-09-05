@@ -1,77 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Probability Distribution</title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.0/math.js"></script>
 
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Probability Distribution</title>
-	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/9.3.0/math.js"></script>
+    <link rel="stylesheet" href="Styles.css" />
+  </head>
 
-	<link rel="stylesheet" href="Styles.css">
-</head>
+  <body>
+    <div style="text-align: center">
+      <div style="margin: 0px 10px; display: inline-block">
+        <h3 style="margin: 10px 0px">확률 (%)</h3>
+        <div class="number-input">
+          <button id="probNum_minus"></button>
+          <input
+            type="number"
+            id="probNum"
+            min="0"
+            max="100"
+            value="5"
+            step="0.001"
+            onchange="mainInputUpdate()"
+          />
+          <button id="probNum_plus" class="plus"></button>
+        </div>
+      </div>
 
-<body>
+      <div style="margin: 0px 10px; display: inline-block">
+        <h3 style="margin: 10px 0px">시행 횟수 (회)</h3>
+        <div class="number-input">
+          <button id="tryNum_minus" step="-1"></button>
+          <input
+            type="number"
+            id="tryNum"
+            min="0"
+            max="1000"
+            value="10"
+            step="1"
+            onchange="mainInputUpdate()"
+          />
+          <button id="tryNum_plus" class="plus"></button>
+        </div>
+      </div>
+    </div>
 
-	<div style="text-align:center; ">
-		<div style="margin:0px 10px; display:inline-block">
-			<h3 style="margin: 10px 0px;">확률 (%)</h3>
-			<div class="number-input">
-				<button id="probNum_minus"></button>
-				<input type="number" id="probNum" min="0" max="100" value="5" step="0.001" onchange="mainInputUpdate()">
-				<button id="probNum_plus" class="plus"></button>
-			</div>
-		</div>
+    <div id="container" style="width: 90%; margin: auto">
+      <canvas id="canvas"></canvas>
+    </div>
 
-		<div style="margin:0px 10px; display:inline-block">
-			<h3 style="margin: 10px 0px;">시행 횟수 (회)</h3>
-			<div class="number-input">
-				<button id="tryNum_minus" step="-1"></button>
-				<input type="number" id="tryNum" min="0" max="1000" value="10" step="1" onchange="mainInputUpdate()">
-				<button id="tryNum_plus" class="plus"></button>
-			</div>
-		</div>
-	</div>
+    <div style="text-align: center">
+      <h3 style="margin: 5px 0px">표시 범위</h3>
+      <div class="number-input">
+        <button id="frontExpectNum_minus"></button>
+        <input type="number" id="frontExpectNum" step="1" onchange="frontExpectUpdate()" />
+        <button id="frontExpectNum_plus" class="plus"></button>
+      </div>
+      <h1 style="margin: 5px 0px; display: inline-block; vertical-align: middle">~</h1>
+      <div class="number-input">
+        <button id="backExpectNum_minus"></button>
+        <input type="number" id="backExpectNum" step="1" onchange="backExpectUpdate()" />
+        <button id="backExpectNum_plus" class="plus"></button>
+      </div>
+    </div>
 
-	<div id="container" style="width: 90%; margin: auto;">
-		<canvas id="canvas"></canvas>
-	</div>
+    <div style="text-align: center">
+      <h3 style="margin: 20px 0px; display: inline-block">데이터 레이블 표시</h3>
+      <label class="switch">
+        <input
+          type="checkbox"
+          id="viewValueOnGraph"
+          onchange="getToggle($('#viewValueOnGraph').is(':checked'))"
+        />
+        <span class="slider round"></span>
+      </label>
+    </div>
 
+    <div style="text-align: center">
+      <input type="button" value="Chart Download" onclick="captureScreen()" class="Capturebutton" />
+    </div>
 
-	<div style="text-align:center;">
-		<h3 style="margin: 5px 0px;">표시 범위</h3>
-		<div class="number-input">
-			<button id="frontExpectNum_minus"></button>
-			<input type="number" id="frontExpectNum" step="1" onchange="frontExpectUpdate()">
-			<button id="frontExpectNum_plus" class="plus"></button>
-		</div>
-		<h1 style="margin: 5px 0px; display:inline-block; vertical-align: middle;">~</h3>
-		<div class="number-input">
-			<button id="backExpectNum_minus"></button>
-			<input type="number" id="backExpectNum" step="1" onchange="backExpectUpdate()">
-			<button id="backExpectNum_plus" class="plus"></button>
-		</div>
-	</div>
+    <div>
+      ※ 확률 범위 : 0 ~ 100 (%)<br />
+      ※ 시행 횟수 범위 : 0 ~ 1000 (회)
+    </div>
 
-	<div style="text-align:center;">
-		<h3 style="margin: 20px 0px; display:inline-block">데이터 레이블 표시</h3>
-		<label class="switch">
-			<input type="checkbox" id="viewValueOnGraph" onchange="getToggle($('#viewValueOnGraph').is(':checked'))">
-			<span class="slider round"></span>
-		</label>
-	</div>
-
-	<div style="text-align:center;">
-		<input type="button" value="Chart Download" onclick="captureScreen()" class="Capturebutton">
-	</div>
-
-	<footer>
-		※ 확률 범위 : 0 ~ 100 (%)<br>
-		※ 시행 횟수 범위 : 0 ~ 1000 (회)
-	</footer>
-
-	<script src="Script.js"></script>
-	<script src="ButtonEvent.js"></script>
-</body>
-
+    <script src="Script.js"></script>
+    <script src="ButtonEvent.js"></script>
+  </body>
+  <footer>
+    <hr />
+    <div>Made by ZEED</div>
+  </footer>
 </html>
