@@ -382,5 +382,5 @@ function getToggle(viewVal) {
   myChart.update();
 
   // reset animation duration
-  myChart.options.animation.duration = 1000;
+  myChart.options.animation.duration = 500;
 }
