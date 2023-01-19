@@ -15,7 +15,7 @@
       <div style="margin: 0px 10px; display: inline-block">
         <h3 style="margin: 10px 0px">확률 (%)</h3>
         <div class="number-input">
-          <button id="probNum_minus"></button>
+          <button id="probNum_minus" tabindex="-1"></button>
           <input
             type="number"
             id="probNum"
@@ -25,14 +25,14 @@
             step="0.001"
             onchange="mainInputUpdate()"
           />
-          <button id="probNum_plus" class="plus"></button>
+          <button id="probNum_plus" class="plus" tabindex="-1"></button>
         </div>
       </div>
 
       <div style="margin: 0px 10px; display: inline-block">
         <h3 style="margin: 10px 0px">시행 횟수 (회)</h3>
         <div class="number-input">
-          <button id="tryNum_minus" step="-1"></button>
+          <button id="tryNum_minus" step="-1" tabindex="-1"></button>
           <input
             type="number"
             id="tryNum"
@@ -42,7 +42,7 @@
             step="1"
             onchange="mainInputUpdate()"
           />
-          <button id="tryNum_plus" class="plus"></button>
+          <button id="tryNum_plus" class="plus" tabindex="-1"></button>
         </div>
       </div>
     </div>
@@ -54,15 +54,15 @@
     <div style="text-align: center">
       <h3 style="margin: 5px 0px">표시 범위</h3>
       <div class="number-input">
-        <button id="frontExpectNum_minus"></button>
+        <button id="frontExpectNum_minus" tabindex="-1"></button>
         <input type="number" id="frontExpectNum" step="1" onchange="frontExpectUpdate()" />
-        <button id="frontExpectNum_plus" class="plus"></button>
+        <button id="frontExpectNum_plus" class="plus" tabindex="-1"></button>
       </div>
       <h1 style="margin: 5px 0px; display: inline-block; vertical-align: middle">~</h1>
       <div class="number-input">
-        <button id="backExpectNum_minus"></button>
+        <button id="backExpectNum_minus" tabindex="-1"></button>
         <input type="number" id="backExpectNum" step="1" onchange="backExpectUpdate()" />
-        <button id="backExpectNum_plus" class="plus"></button>
+        <button id="backExpectNum_plus" class="plus" tabindex="-1"></button>
       </div>
     </div>
 
